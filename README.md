@@ -1,1 +1,1 @@
-# DjangoLab
+# Django_lab
