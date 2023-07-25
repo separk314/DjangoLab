@@ -14,11 +14,14 @@ jobs:
     steps:  
       - name: connect ec2
         uses: appleboy/ssh-action@master  # ssh 접속 라이브러리
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           port: 22
+          envs: SECRET_KEY
           script: |
             cd /home/ubuntu/Django_lab
             source venv/bin/activate
@@ -27,5 +30,4 @@ jobs:
             git pull
             echo "{\"SECRET_KEY\": \"$SECRET_KEY\"}" >> secrets.json
             nohup python manage.py runserver 0.0.0.0:8000 &
-        env:
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        
