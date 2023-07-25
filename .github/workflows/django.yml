@@ -27,12 +27,14 @@ jobs:
         pip install -r requirements.txt
     
     # secrets.json 파일 생성
-    - name: Generate-json-file
-      id: Generate-json-file
-      uses: jsdaniell/create-json@1.1.2
-      with:
-        name: "secrets.json"
-        json: ${{ secrets.SECRET_JSON }}
+    - name: Generate secrets.json file
+      run: |
+        echo "\"SECRET_KEY\": "
+        echo SECRET_KEY
+        echo "SECRET_KEY: $SECRET_KEY" >> secrets.json
+        
+      env:
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
     
     - name: Run Tests
       run: |
