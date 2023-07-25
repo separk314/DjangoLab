@@ -24,7 +24,7 @@ jobs:
           envs: SECRET_KEY
           script: |
             cd /home/ubuntu/Django_lab
-            source venv/bin/activate
+            source venv/bin/activate 
             cd /home/ubuntu/Django_lab
             pip install -r requirements.txt
             git pull
