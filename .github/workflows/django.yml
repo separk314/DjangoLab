@@ -29,7 +29,8 @@ jobs:
     # secrets.json 파일 생성
     - name: Generate secrets.json file
       run: |  # secrets.json 파일 생성
-        echo ${{ secrets.SECRETS_JSON }} | base64 -d >> secrets.json
+        echo ${{ secrets.SECRETS_JSON }} | base64 -d > secrets.json
+      shell: bash
     
     - name: Run Tests
       run: |
