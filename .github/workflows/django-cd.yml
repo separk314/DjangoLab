@@ -21,9 +21,8 @@ jobs:
           port: 22
           script: |
             cd /home/ubuntu/Django_lab
-            cd venv/Scripts
-            activate
+            source venv/bin/activate
             cd /home/ubuntu/Django_lab
             pip install -r requirements.txt
             git pull
-            sudo systemctl restart uwsgi
+            nohup python manage.py runserver 0.0.0.0:8000 &
