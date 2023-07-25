@@ -1,39 +1,25 @@
-name: Django CI
+name: Django CD
 
-on: # action을 언제 실행할지 설정
-  push:
-    branches: [ "ci/cd" ]
-  pull_request:
-    branches: [ "ci/cd" ]
+on: 
+  workflow_run:
+    workflows: [ "Django CI" ]
+    types:
+      - completed
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
-    strategy:
-      max-parallel: 4   # 병렬 처리
-      matrix:
-        python-version: [3.8, 3.9]
 
     steps:
-    - uses: actions/checkout@v3   # @: github actions 라이브러리(v3) 사용
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install Dependencies
-      run: |  # CLI 명령어
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-    
-    # secrets.json 파일 생성
-    - name: Generate secrets.json file
-      run: |
-        echo "{\"SECRET_KEY\": \"$SECRET_KEY\"}" >> secrets.json
-        
-      env:
-        SECRET_KEY: ${{ secrets.SECRET_KEY }}
-    
-    - name: Run Tests
-      run: |
-        python manage.py test
+      - name: connect ec2
+        uses: appleboy/ssh-action@master  # ssh 접속 라이브러리
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: 22
+          script: |
+            cd /home/ubuntu/Django_lab
+            git pull
+            sudo systemctl restart uwsgi
