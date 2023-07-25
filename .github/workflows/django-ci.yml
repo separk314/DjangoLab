@@ -2,9 +2,9 @@ name: Django CI
 
 on: # action을 언제 실행할지 설정
   push:
-    branches: [ "ci/cd" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "ci/cd" ]
+    branches: [ "master" ]
 
 jobs:
   build:
