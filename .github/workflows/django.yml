@@ -26,12 +26,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     
-    # secrets.json 파일 생성 및 SECRET_KEY 추가
+    # secrets.json 파일 생성
     - name: Generate secrets.json file
       run: |  # secrets.json 파일 생성
-        echo "SECRET_KEY: $SECRET_KEY" >> secrets.json
-      env:  # SECRET_KEY 변수 추가
-        SECRET_KEY: $ {{ secrets.SECRET_KEY }}
+        echo ${{ secrets.SECRETS_JSON }} | base64 -d >> secrets.json
     
     - name: Run Tests
       run: |
