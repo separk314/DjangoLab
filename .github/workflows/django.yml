@@ -25,6 +25,14 @@ jobs:
       run: |  # CLI 명령어
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+    
+    # secrets.json 파일 생성 및 SECRET_KEY 추가
+    - name: Generate secrets.json file
+      run: |  # secrets.json 파일 생성
+        echo "SECRET_KEY=$SECRET_KEY" >> secrets.json
+      env:  # SECRET_KEY 변수 추가
+        SECRET_KEY: $ {{ secrets.SECRET_KEY }}
+    
     - name: Run Tests
       run: |
         python manage.py test
