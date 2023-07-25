@@ -27,8 +27,8 @@ jobs:
         pip install -r requirements.txt
     
     # secrets.json 파일 생성
-    - name: Generate secrets.json file
-      id: Generate secrets.json file
+    - name: Generate-json-file
+      id: Generate-json-file
       uses: jsdaniell/create-json@1.1.2
       with:
         name: "secrets.json"
