@@ -34,4 +34,4 @@ jobs:
             ls /home/ubuntu/Django_lab
             echo "< secrets.json file created >"
             nohup python manage.py runserver 0.0.0.0:8000 &
-        
+            echo "nohup 배포"
