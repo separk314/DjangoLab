@@ -1,7 +1,7 @@
 # Django_lab
 - [X] CI
-- [ ] secrets.json 파일 해결
-- [ ] CD: EC2 연결
+- [ ] secrets.json을 json 형식으로 추가
+- [X] CD: EC2 연결
 - [ ] CD: S3 연결
 - [ ] IAM 사용자 설정(codedeploy)
 
