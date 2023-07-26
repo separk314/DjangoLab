@@ -30,7 +30,8 @@ jobs:
             echo "< requirements.txt installed >"
             git pull
             echo "< pulled completed >"
-            echo "{\"SECRET_KEY\": \"$SECRET_KEY\"}" > secrets.json
+            echo "{\"SECRET_KEY\": \"$SECRET_KEY\"}" > /home/ubuntu/Django_lab/secrets.json
+            ls /home/ubuntu/Django_lab
             echo "< secrets.json file created >"
             nohup python manage.py runserver 0.0.0.0:8000 &
         
